@@ -74,14 +74,14 @@ int initialize_players(Player players[]){
 
         gets(players[i].name);
 
-        printf("\nWhat color would you like to play with %s?\n\n"
-               "Enter 0 for Red\n"
+        printf("\nEnter 0 for Red\n"
                "Enter 1 for Blue\n"
                "Enter 2 for Green\n"
                "Enter 3 for Yellow\n"
                "Enter 4 for Pink\n"
-               "Enter 5 for Orange\n\n", players[i].name);
-        //todo add input options
+               "Enter 5 for Orange\n");
+        printf("\nWhat color would you like to play with %s: ", players[i].name);
+
         scanf("%u", &players[i].col);
     }
 

@@ -35,7 +35,7 @@ char printToken(Token *t){
  * Input: the board to be printed.
  */
 void print_board(Square board[NUM_ROWS][NUM_COLUMNS]){
-    printf("                THE BOARD\n");
+    printf("\n                THE BOARD\n");
     for(int i =0; i < NUM_ROWS; i++){
 
         //prints an horizontal line
@@ -151,7 +151,7 @@ char *color_name(enum Color color){
         case 3: return "Yellow";
         case 4: return "Pink";
         case 5: return "Orange";
-        default: return "color blind"; //change
+        default: return "ERROR";
     }
 }
 
@@ -217,17 +217,17 @@ int play_game(Square board[NUM_ROWS][NUM_COLUMNS], Player players[], int numPlay
     srand(time(NULL));
 
     for(int i = 0; i < numPlayers; ++i){
-        printf("\nPlayer's turn: %s (%s)\n", players[i].name, color_name(players[i].col));
+        printf("\nPlayer's turn: %s (%s)", players[i].name, color_name(players[i].col));
 
         int dice = rand()%6;
-        printf("\nYou rolled: %d: ", dice);
+        printf("\nYou rolled: %d\n", dice);
 
         int answer;
         printf("\nDo you want to move sideways? \n1 for yes and 0 for no: ");
         scanf("%d", &answer);
 
         if (answer == 1){
-            printf("\n%s, choose which %s token you would like to move sideways.", players[i].name, color_name(players[i].col));
+            printf("\n%s, choose which %s token you would like to move sideways.\n", players[i].name, color_name(players[i].col));
 
             printf("\nEnter row number: ");
             scanf("%d", &rowCord);
