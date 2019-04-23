@@ -6,7 +6,10 @@
 
 
 #include "game_init.h"
+#include "game_logic.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 void printLine();
 
@@ -16,7 +19,7 @@ void printLine();
  * Input: t - pointer to a token
  * Output: initial of the color of the token
  */
-char print_token(Token *t){
+char printToken(Token *t){
     if((*t).col== PINK) return 'P';
     if((*t).col== RED) return 'R';
     if((*t).col== BLU) return 'B';
@@ -44,7 +47,7 @@ void print_board(Square board[NUM_ROWS][NUM_COLUMNS]){
         //c is assigned the initial of the color of the token that occupies the square
         for (int j = 0; j < NUM_COLUMNS; j++){
             if(board[i][j].topOfStack != NULL){
-                c = print_token(board[i][j].topOfStack);
+                c = printToken(board[i][j].topOfStack);
             }
             //if the square (i,j) is empty
             else{
@@ -75,18 +78,25 @@ void printLine(){
  *        numPlayers - the number of players
  */
 void place_tokens(Square board[NUM_ROWS][NUM_COLUMNS], Player players[], int numPlayers){
-    // TO BE IMPLEMENTED
+    /*FOR ALL 4 TOKENS OF EACH PLAYER*/
+    for (int t = 0; t < 4; ++t){
+        for (int p = 0; p < numPlayers; ++p){
 
+                int row;
+
+                printf("\n%s, place Token %d on row (0 to 5): ", players[p].name, t + 1);
+                scanf("%d", &row);
+
+                Token *newToken = malloc(sizeof(Token));
+                newToken->col = players[p].col;
+                newToken->under = board[row][0].topOfStack;
+                board[row][0].topOfStack = newToken;
+
+                printToken(board[row][0].topOfStack);
+                print_board(board);
+        }
+    }
 }
-
-
-/*
- * Place tokens in the first column of the board
- *
- * Input: board - a 6x9 array of squares that represents the board
- *        players - the array of the players
- *        numPlayers - the number of players
- */
 
 void play_game(Square board[NUM_ROWS][NUM_COLUMNS], Player players[], int numPlayers){
     //TO BE IMPLEMENTED
