@@ -6,7 +6,9 @@
  */
 void print_board(Square board[NUM_ROWS][NUM_COLUMNS]);
 
+int smallestTokenStack;
 
+void checkingColumn(Square board[NUM_ROWS][NUM_COLUMNS], int colCord);
 /*
  * Place tokens in the first column of the board
  *
