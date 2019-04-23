@@ -197,7 +197,7 @@ void play_game(Square board[NUM_ROWS][NUM_COLUMNS], Player players[], int numPla
         printf("\nYou rolled: %d: ", dice);
 
         int answer;
-        printf("\nDo you want to move sidways? \n1 for yes and 0 for no: ");
+        printf("\nDo you want to move sideways? \n1 for yes and 0 for no: ");
         scanf("%d", &answer);
 
         if (answer == 1){
@@ -313,8 +313,45 @@ void play_game(Square board[NUM_ROWS][NUM_COLUMNS], Player players[], int numPla
                 }
             }
         }
+
+        else if(answer == 0){
+            printf("\n%s, please move token from row %d forwards\n"
+                   "\nWhich column is the token which you would like to move: ", players[i].name, dice);
+            scanf("%d", &colCord);
+
+            if(board[dice][colCord].topOfStack == NULL){
+                 printf("\nEmpty Square\n");
+                }
+
+            if (board[dice][colCord].type == OBSTACLE && board[dice][colCord].topOfStack != NULL){
+                if (obstacleCheck(board, dice, colCord) == 0){
+                    printf("\nYou are in an obstacle. You can't move this token out until all tokens have reached column %d", colCord);
+                    print_board(board);
+                }
+
+                else if (obstacleCheck(board, dice, colCord) == 1){
+                    tokenTravel(board, dice, colCord, dice, colCord+1);
+                    printToken(board[dice][colCord+1].topOfStack);
+                    board[dice][colCord].type = NORMAL;
+                    print_board(board);
+                }
+            }
+
+            if(board[dice][colCord].type == NORMAL && board[dice][colCord].topOfStack != NULL){
+
+                tokenTravel(board, dice, colCord, dice, colCord+1);
+                printToken(board[dice][colCord+1].topOfStack);
+                print_board(board);
+            }
+
+            /*RESETING PLAYER*/
+            if (i == numPlayers - 1){
+                i = -1;
+            }
+        }
     }
 }
+
 
 
 
