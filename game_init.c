@@ -41,9 +41,40 @@ void initialize_board(Square board[NUM_ROWS][NUM_COLUMNS]){
  */
 int initialize_players(Player players[]){
 
-    //YOU WILL NEED TO IMPLEMENT THIS FUNCTION IN THIS LAB
-        return 0;
+    int numPlayers = 0;
+
+    printf("\nHow many players? (Minimum 2, Maximum 6): ");
+    scanf("%d", &numPlayers);
+
+
+    while(numPlayers < 2 || numPlayers > 6){
+        printf("Invalid amount of players");
+
+        printf("\nHow many players? (Minimum 2, Maximum 6): ");
+        scanf("%d", &numPlayers);
     }
+
+    for(int i = 0; i < numPlayers; ++i){
+        printf("\nPlayer %d, ", i+1); //player id
+        printf("What is your name: ");
+
+        char removeNewline;
+        scanf("%c", &removeNewline);
+
+        gets(players[i].name);
+
+        printf("\nWhat color would you like to play with %s?\n\n"
+               "Enter 0 for Red\n"
+               "Enter 1 for Blue\n"
+               "Enter 2 for Green\n"
+               "Enter 3 for Yellow\n"
+               "Enter 4 for Pink\n"
+               "Enter 5 for Orange\n\n", players[i].name);
+        //todo add input options
+        scanf("%u", &players[i].col);
+    }
+    return 0;
+}
 
 
 
