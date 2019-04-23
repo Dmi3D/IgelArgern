@@ -142,9 +142,59 @@ void place_tokens(Square board[NUM_ROWS][NUM_COLUMNS], Player players[], int num
     }
 }
 
-void play_game(Square board[NUM_ROWS][NUM_COLUMNS], Player players[], int numPlayers){
-    //TO BE IMPLEMENTED
+/*RETURNING COLOR NAME RELATING TO ENUM*/
+char *color_name(enum Color color){
+    switch(color){
+        case 0: return "Red";
+        case 1: return "Blue";
+        case 2: return "Green";
+        case 3: return "Yellow";
+        case 4: return "Pink";
+        case 5: return "Orange";
+        default: return "color blind"; //change
+    }
 }
+
+void play_game(Square board[NUM_ROWS][NUM_COLUMNS], Player players[], int numPlayers){
+    int rowCord, colCord, upOrDown;
+
+    srand(time(NULL));
+
+    for(int i = 0; i < numPlayers; ++i){
+            printf("\nPlayer's turn: %s (%s)\n", players[i].name, color_name(players[i].col));
+
+            int dice = rand()%6;
+            printf("\nYou rolled: %d: ", dice);
+
+            int answer;
+            printf("\nDo you want to move sidways? \n1 for yes and 0 for no: ");
+            scanf("%d", &answer);
+
+            if (answer == 1){
+                printf("\n%s, choose which %s token you would like to move sideways.", players[i].name, color_name(players[i].col));
+
+                printf("\nEnter row number: ");
+                scanf("%d", &rowCord);
+
+                printf("\nEnter column number: ");
+                scanf("%d", &colCord);
+
+                while(board[rowCord][colCord].topOfStack == NULL){
+                    printf("\nERROR: Empty Square\n");
+
+                    printf("\n%s, choose which %s token you would like to move sideways.\n", players[i].name, color_name(players[i].col));
+
+                    printf("\nEnter row number: ");
+                    scanf("%d", &rowCord);
+
+                    printf("\nEnter column number: ");
+                    scanf("%d", &colCord);
+                }
+            }
+    }
+}
+
+
 
 
 
