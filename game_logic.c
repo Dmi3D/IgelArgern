@@ -176,6 +176,31 @@ int obstacleCheck(Square board[NUM_ROWS][NUM_COLUMNS], int dice, int colCord){
     return 1;
 }
 
+/*CHECKS IF THERE IS WINNER*/
+int checkWinner(Square board[NUM_ROWS][NUM_COLUMNS], Player players[], int numPlayers){
+    int *colorCounters = (int*)calloc(numPlayers, sizeof(int));
+
+    for (int i = 0; i < numPlayers; ++i){
+        for (int j = 0; j < NUM_ROWS; ++j){
+            Token *token = board[j][8].topOfStack;
+
+            while (token != NULL){
+                if(token->col == players[i].col){
+                    colorCounters[i] += 1;
+                }
+
+                token = token->under;
+                }
+            }
+
+        if (colorCounters[i] >= 3){
+                return i;
+        }
+    }
+
+    return 10;
+}
+
 /*MOVING TOKEN ON BOARD*/
 void tokenTravel(Square board[][NUM_COLUMNS], int currentPosRow, int currentPosCol, int newPosRow, int newPostCol){
     Token *Token = board[currentPosRow][currentPosCol].topOfStack;
@@ -185,8 +210,9 @@ void tokenTravel(Square board[][NUM_COLUMNS], int currentPosRow, int currentPosC
     board[newPosRow][newPostCol].topOfStack = Token;
 }
 
-void play_game(Square board[NUM_ROWS][NUM_COLUMNS], Player players[], int numPlayers){
+int play_game(Square board[NUM_ROWS][NUM_COLUMNS], Player players[], int numPlayers){
     int rowCord, colCord, upOrDown;
+    int isWinner = checkWinner(board, players, numPlayers);
 
     srand(time(NULL));
 
@@ -311,6 +337,12 @@ void play_game(Square board[NUM_ROWS][NUM_COLUMNS], Player players[], int numPla
                     printToken(board[dice][colCord+1].topOfStack);
                     print_board(board);
                 }
+                isWinner = checkWinner(board, players, numPlayers);
+
+                if (isWinner != 10){
+                    printf("\nWINNER IS: %s", players[checkWinner(board, players, numPlayers)].name);
+                    return 1;
+                }
             }
         }
 
@@ -344,12 +376,20 @@ void play_game(Square board[NUM_ROWS][NUM_COLUMNS], Player players[], int numPla
                 print_board(board);
             }
 
+            isWinner = checkWinner(board, players, numPlayers);
+
+            if (isWinner != 10){
+                printf("\nWINNER IS: %s", players[checkWinner(board, players, numPlayers)].name);
+                return 1;
+            }
+
             /*RESETING PLAYER*/
             if (i == numPlayers - 1){
                 i = -1;
             }
         }
     }
+    return 0;
 }
 
 

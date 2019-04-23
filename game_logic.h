@@ -35,6 +35,6 @@ void tokenTravel(Square board[][NUM_COLUMNS], int currentPosRow, int currentPosC
  *        players - the array of the players
  *        numPlayers - the number of players
  */
-void play_game(Square board[NUM_ROWS][NUM_COLUMNS], Player players[], int numPlayers);
+int play_game(Square board[NUM_ROWS][NUM_COLUMNS], Player players[], int numPlayers);
 
 

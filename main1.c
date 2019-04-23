@@ -18,7 +18,7 @@
 /*
  *
  */
-int main(int argc, char** argv) {
+int main(void) {
 
     //the board is defined as a 2-Dimensional array of squares
     Square board[NUM_ROWS][NUM_COLUMNS];
@@ -42,13 +42,10 @@ int main(int argc, char** argv) {
     //on the first column of the board
     place_tokens(board, players, numPlayers);
 
-
     //manages the turns of the game and identifies a winner
-    play_game(board, players, numPlayers);
+    while(play_game(board, players, numPlayers) != 1);
 
     return 0;
-
-
 
 }
 
