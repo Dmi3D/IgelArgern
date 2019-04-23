@@ -73,5 +73,7 @@ void initialize_board(Square board[NUM_ROWS][NUM_COLUMNS]);
  */
 int initialize_players(Player players[]);
 
+int sameColor(Player players[], int numPlayers);
+
 
 

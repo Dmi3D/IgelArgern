@@ -8,6 +8,17 @@
 #include "game_init.h"
 #include <stdio.h>
 
+/*CHECKING IF A COLOR SELECTED BY USER IS TAKEN OR NOT*/
+int sameColor(Player players[], int numPlayers){
+        for (int i = 0; i < numPlayers; ++i){
+            for (int j = i+1; j < numPlayers; ++j){
+                if (players[j].col == players[i].col){
+                    return 1;
+                }
+            }
+        }
+        return 0;
+}
 
 /*
  * This function creates the board for the first time
@@ -73,7 +84,23 @@ int initialize_players(Player players[]){
         //todo add input options
         scanf("%u", &players[i].col);
     }
-    return 0;
+
+    /*WHILE  COLOR SELECTED BY USER IS ALREADY TAKEN*/
+    while(sameColor(players, numPlayers) == 1){
+        printf("\nSome players have chosen the same color. Choose different colors.\n");
+        for (int i = 0; i < numPlayers; ++i){
+            printf("\nWhat color would you like to play with %s?\n\n"
+                    "Enter 0 for Red\n"
+                    "Enter 1 for Blue\n"
+                    "Enter 2 for Green\n"
+                    "Enter 3 for Yellow\n"
+                    "Enter 4 for Pink\n"
+                    "Enter 5 for Orange\n\n", players[i].name);
+
+            scanf("%u", &players[i].col);
+        }
+    }
+        return numPlayers;
 }
 
 
