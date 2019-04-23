@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-/* 
+/*
  * File:   newfile.h
  * Author: lpasqua
  *
@@ -18,28 +18,29 @@
 
 
 //types of squares
-enum stype{
+enum Stype{
     NORMAL, OBSTACLE };
 
 //colors of tokens
-enum color {
+enum Color {
     RED, BLU, GREEN, YELLOW, PINK, ORANGE
 };
 
-//defines a token. 
+//defines a token.
 //Note each token can be associated with a color
-typedef struct token{
-   enum color col; 
-    
-}token;
+typedef struct Token{
+   enum Color col;
+   struct Token *under;
+
+}Token;
 
 //Defines a square of the board.
-typedef struct square{
+typedef struct Square{
     //A square can be a NORMAL or an OBSTACLE square
-     enum stype type;
+     enum Stype type;
      //the stack of tokens that can be placed on the board square
-     token * stack;      
-}square;
+     Token *topOfStack;
+}Square;
 
 
 
@@ -49,27 +50,28 @@ typedef struct square{
  * such as a name and a color.
  */
 typedef struct player{
-    
-    
-}player; 
+    char name[20];
+    enum Color col;
+
+}Player;
 
 
 /*
  * This function creates the board for the first time
- * 
+ *
  * Input: board - a 6x9 array of squares
  *
  */
-void initialize_board(square board[NUM_ROWS][NUM_COLUMNS]);
+void initialize_board(Square board[NUM_ROWS][NUM_COLUMNS]);
 
 /*
  * This function creates players for the first time
- * 
+ *
  * Input: the array of players to be initialized
  * Output: The number of players of the game
  *
  */
-int initialize_players(player players[]);
+int initialize_players(Player players[]);
 
 
 
