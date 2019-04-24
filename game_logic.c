@@ -225,6 +225,7 @@ int play_game(Square board[NUM_ROWS][NUM_COLUMNS], Player players[], int numPlay
             scanf("%d", &colCord);
 
             while(board[rowCord][colCord].topOfStack == NULL){
+                print_board(board);
                 printf("\nERROR: Empty Square\n");
 
                 printf("\n%s, choose which %s token you would like to move sideways.\n", players[i].name, color_name(players[i].col));
@@ -264,6 +265,7 @@ int play_game(Square board[NUM_ROWS][NUM_COLUMNS], Player players[], int numPlay
                 scanf("%d", &colCord);
 
                 while(board[rowCord][colCord].topOfStack == NULL){
+                    print_board(board);
                     printf("\nERROR: Empty Square\n");
 
                     printf("\n%s, choose which %s token you would like to move sideways.\n", players[i].name, color_name(players[i].col));
@@ -274,6 +276,7 @@ int play_game(Square board[NUM_ROWS][NUM_COLUMNS], Player players[], int numPlay
                     printf("\nEnter column number: ");
                     scanf("%d", &colCord);
                 }
+                correctToken = isCorrectToken(board, players, i, rowCord, colCord);
 
 
                 /*IF CORRECT TOKEN AND NORMAL SQUARE, BREAK*/
@@ -304,13 +307,14 @@ int play_game(Square board[NUM_ROWS][NUM_COLUMNS], Player players[], int numPlay
                 scanf("%d", &colCord);
 
                 if(board[dice][colCord].topOfStack == NULL){
-                     printf("\nEmpty Square\n");
+                     print_board(board);
+                     printf("\nERROR: Empty Square\n");
                 }
 
                 if (board[dice][colCord].type == OBSTACLE && board[dice][colCord].topOfStack != NULL){
                     if (obstacleCheck(board, dice, colCord) == 0){
-                        printf("\nYou are in an obstacle. You can't move this token out until all tokens have reached column %d", colCord);
                         print_board(board);
+                        printf("\nYou are in an obstacle. You can't move this token out until all tokens have reached column %d", colCord);
                     }
 
                     else if (obstacleCheck(board, dice, colCord) == 1){
@@ -341,13 +345,14 @@ int play_game(Square board[NUM_ROWS][NUM_COLUMNS], Player players[], int numPlay
             scanf("%d", &colCord);
 
             if(board[dice][colCord].topOfStack == NULL){
-                 printf("\nEmpty Square\n");
+                print_board(board);
+                printf("\nERROR: Empty Square\n");
                 }
 
             if (board[dice][colCord].type == OBSTACLE && board[dice][colCord].topOfStack != NULL){
                 if (obstacleCheck(board, dice, colCord) == 0){
-                    printf("\nYou are in an obstacle. You can't move this token out until all tokens have reached column %d", colCord);
                     print_board(board);
+                    printf("\nYou are in an obstacle. You can't move this token out until all tokens have reached column %d", colCord);
                 }
 
                 else if (obstacleCheck(board, dice, colCord) == 1){
