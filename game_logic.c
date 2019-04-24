@@ -1,10 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
 #include "game_init.h"
 #include "game_logic.h"
 #include <stdio.h>
@@ -29,11 +22,7 @@ char printToken(Token *t){
     return '\0';
 }
 
-/*
- * Prints the board
- *
- * Input: the board to be printed.
- */
+/*PRINTS THE BOARD*/
 void print_board(Square board[NUM_ROWS][NUM_COLUMNS]){
     printf("\n                THE BOARD\n");
     for(int i =0; i < NUM_ROWS; i++){
